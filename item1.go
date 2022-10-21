@@ -1,3 +1,13 @@
+/*
+Creadores:
+	Obando Arrieta Felipe de Jesús - 2021035489
+    Sanabria Solano María Fernanda - 2021005572
+
+Fecha Creación: 17/10/2022
+Ultima Modificacion:
+
+*/
+
 package main
 
 import "fmt"
