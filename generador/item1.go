@@ -8,7 +8,7 @@ Ultima Modificacion:
 
 */
 
-package main
+package generador
 
 import "fmt"
 
@@ -74,6 +74,8 @@ func imprimir(list []int) {
 
 }
 
+/*
+
 // Main function
 func main() {
 	imprimir(generaAleatorioAux(13, 10))
@@ -81,3 +83,5 @@ func main() {
 	// fmt.Println(getX(20))
 	// fmt.Println(getX(13))
 }
+
+*/
