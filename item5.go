@@ -183,7 +183,7 @@ func inOrder(raiz *Nodo) {
 //http://www.smunlisted.com/day-stout-warren-dsw-algorithm.html
 // https://csactor.blogspot.com/2018/08/dsw-day-stout-warren-algorithm-dsw.html
 
-func rotateR(rama *Nodo) bool {
+func rotarD(rama *Nodo) bool {
 	if &rama == nil {
 		return false
 	}
@@ -208,7 +208,7 @@ func rotateR(rama *Nodo) bool {
 	return true
 }
 
-func rotateL(rama *Nodo) bool {
+func rotarI(rama *Nodo) bool {
 	if rama == nil {
 		return false
 	}
@@ -233,13 +233,13 @@ func rotateL(rama *Nodo) bool {
 	return true
 }
 
-func balanceTree(arbol *Arbol) {
+func balancear(arbol *Arbol) {
 	var tmp *Nodo = arbol.raiz
 	var cant int = 0
 	//Pasa todos los nodos al lado derecho
 	for tmp != nil {
 		for tmp.hijoIzquierdo != nil {
-			rotateR(tmp)
+			rotarD(tmp)
 		}
 		cant += 1
 		tmp = tmp.hijoDerecho
@@ -247,29 +247,24 @@ func balanceTree(arbol *Arbol) {
 	var nodosPerf = (int(math.Pow(2.0, math.Ceil(math.Log2(float64(cant)))-1.0)) - 1) //Numero de nodos del arbol perfectamente balanceado mas cercano
 	var ultimos int = cant - nodosPerf                                                //Numero de hijos esperados en el ultimo nivel
 
-	fmt.Println(nodosPerf)
-	fmt.Println(cant)
-	fmt.Println(ultimos)
 	tmp = arbol.raiz
 	for i := 0; i < ultimos; i++ {
 		if i == 0 {
-			rotateL(tmp)
+			rotarI(tmp)
 			tmp = arbol.raiz
 		} else {
-			rotateL(tmp.hijoDerecho)
+			rotarI(tmp.hijoDerecho)
 			tmp = tmp.hijoDerecho
 		}
 	}
-	// print(arbol.raiz, 0, "R")
-	// var veces int = int(nodosPerf / 2) //Numero de veces en que se rota
-	fmt.Println(nodosPerf)
+
 	for nodosPerf > 1 {
 		nodosPerf /= 2
 		fmt.Println(nodosPerf)
-		rotateL(arbol.raiz)
+		rotarI(arbol.raiz)
 		tmp = arbol.raiz
 		for i := 0; i < nodosPerf; i++ {
-			rotateL(tmp.hijoDerecho)
+			rotarI(tmp.hijoDerecho)
 			tmp = tmp.hijoDerecho
 		}
 	}
@@ -314,7 +309,7 @@ func main() {
 	llave = 23
 	arbol.insertar(llave)
 
-	balanceTree(arbol)
+	balancear(arbol)
 	print(arbol.raiz, 0, "R")
 
 }
