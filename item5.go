@@ -101,13 +101,56 @@ Retorna:
 func buscar(llave int, raiz *Nodo, comparaciones int) (bool, int) {
 	//La raiz del arbol es nula
 	if raiz == nil {
-		return false, comparaciones
+		return false, comparaciones + 1
 	} else if raiz.llave == llave { //La el nodo raiz tiene la llave buscada.
-		return true, comparaciones
+		return true, comparaciones + 1
 	} else if llave > raiz.llave { // Si la llave es mayor que el nodo raiz, llama recursivamente al hijo derecho.
 		return buscar(llave, raiz.hijoDerecho, comparaciones+1)
 	} else { //Si la llave es menor que el nodo raiz, llama recursivamente al hijo izquierdo
 		return buscar(llave, raiz.hijoIzquierdo, comparaciones+1)
+	}
+}
+
+/*
+Metodo auxiliar para buscar una llave en un arbol.
+Parametros:
+
+	-llave int: Llave del nodo que se esta buscando en el arbol.
+
+Retorna:
+
+	-bool: True si encuentra el nodo con la llave buscada
+	| False si no la encuentra
+	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
+*/
+func (arbol *Arbol) buscarConPointerReceiver(llaveIn int) (bool, int) {
+	return arbol.buscarAlternativo(llaveIn, 0)
+}
+
+/*
+Metodo para buscar una llave en un arbol.
+Parametros:
+
+	-llave int: Llave del nodo que se esta buscando en el arbol.
+	-comparaciones int: Contador de cuantas comparaciones hace hasta encontrar o terminar de recorrer el
+	arbol en la busqueda de la llaveIn.
+
+Retorna:
+
+	-bool: True si encuentra el nodo con la llave buscada
+	| False si no la encuentra
+	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
+*/
+func (arbol *Arbol) buscarAlternativo(llave int, comparaciones int) (bool, int) {
+	//La raiz del arbol es nula
+	if arbol.raiz == nil {
+		return false, comparaciones
+	} else if arbol.raiz.llave == llave { //La el nodo raiz tiene la llave buscada.
+		return true, comparaciones
+	} else if llave > arbol.raiz.llave { // Si la llave es mayor que el nodo raiz, llama recursivamente al hijo derecho.
+		return buscar(llave, arbol.raiz.hijoDerecho, comparaciones+1)
+	} else { //Si la llave es menor que el nodo raiz, llama recursivamente al hijo izquierdo
+		return buscar(llave, arbol.raiz.hijoIzquierdo, comparaciones+1)
 	}
 }
 
