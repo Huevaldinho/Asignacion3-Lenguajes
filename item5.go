@@ -194,13 +194,14 @@ func balanceTree(arbol *Arbol) {
 		}
 	}
 	// print(arbol.raiz, 0, "R")
-	var veces int = int(nodosPerf / 2) //Numero de veces en que se rota
-	fmt.Println(veces)
-	for veces < 0 {
-		veces -= 1
+	// var veces int = int(nodosPerf / 2) //Numero de veces en que se rota
+	fmt.Println(nodosPerf)
+	for nodosPerf > 1 {
+		nodosPerf /= 2
+		fmt.Println(nodosPerf)
 		rotateL(arbol.raiz)
 		tmp = arbol.raiz
-		for i := 0; i < veces-3; i++ {
+		for i := 0; i < nodosPerf; i++ {
 			rotateL(tmp.hijoDerecho)
 			tmp = tmp.hijoDerecho
 		}
