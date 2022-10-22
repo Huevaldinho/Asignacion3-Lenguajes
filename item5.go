@@ -85,80 +85,9 @@ type Arbol struct {
 }
 
 /*
-3. BUSCAR
-Parametros:
-
-	-llave int: Llave del nodo que se esta buscando en el arbol.
-	-raiz * Nodo: Nodo raiz para buscar en el arbol (cambia conforme se hace la recursion).
-	-comparaciones: Contador para las comparaciones que se hacen hasta encontrar el nodo.
-
-Retorna:
-
-	-bool: True si encuentra el nodo con la llave buscada
-	| False si no la encuentra
-	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
-*/
-func buscar(llave int, raiz *Nodo, comparaciones int) (bool, int) {
-	//La raiz del arbol es nula
-	if raiz == nil {
-		return false, comparaciones + 1
-	} else if raiz.llave == llave { //La el nodo raiz tiene la llave buscada.
-		return true, comparaciones + 1
-	} else if llave > raiz.llave { // Si la llave es mayor que el nodo raiz, llama recursivamente al hijo derecho.
-		return buscar(llave, raiz.hijoDerecho, comparaciones+1)
-	} else { //Si la llave es menor que el nodo raiz, llama recursivamente al hijo izquierdo
-		return buscar(llave, raiz.hijoIzquierdo, comparaciones+1)
-	}
-}
-
-/*
-Metodo auxiliar para buscar una llave en un arbol.
-Parametros:
-
-	-llave int: Llave del nodo que se esta buscando en el arbol.
-
-Retorna:
-
-	-bool: True si encuentra el nodo con la llave buscada
-	| False si no la encuentra
-	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
-*/
-func (arbol *Arbol) buscarConPointerReceiver(llaveIn int) (bool, int) {
-	return arbol.buscarAlternativo(llaveIn, 0)
-}
-
-/*
-Metodo para buscar una llave en un arbol.
-Parametros:
-
-	-llave int: Llave del nodo que se esta buscando en el arbol.
-	-comparaciones int: Contador de cuantas comparaciones hace hasta encontrar o terminar de recorrer el
-	arbol en la busqueda de la llaveIn.
-
-Retorna:
-
-	-bool: True si encuentra el nodo con la llave buscada
-	| False si no la encuentra
-	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
-*/
-func (arbol *Arbol) buscarAlternativo(llave int, comparaciones int) (bool, int) {
-	//La raiz del arbol es nula
-	if arbol.raiz == nil {
-		return false, comparaciones
-	} else if arbol.raiz.llave == llave { //La el nodo raiz tiene la llave buscada.
-		return true, comparaciones
-	} else if llave > arbol.raiz.llave { // Si la llave es mayor que el nodo raiz, llama recursivamente al hijo derecho.
-		return buscar(llave, arbol.raiz.hijoDerecho, comparaciones+1)
-	} else { //Si la llave es menor que el nodo raiz, llama recursivamente al hijo izquierdo
-		return buscar(llave, arbol.raiz.hijoIzquierdo, comparaciones+1)
-	}
-}
-
-/*
 4. INSERTAR
-Funcion para insertar un nuevo nodo con la llave ingresada.
-Debe ser ejecutado con la instancia del arbol a la que se quiere insertar el nuevo nodo.
-Si la llave esta repetida, aumenta el contador del nodo.
+Metodo para insertar un nuevo nodo con la llave ingresada.
+Si la llave a insertar esta repetida, aumenta el contador del nodo que contiene la llave.
 
 Parametros:
 
@@ -203,22 +132,6 @@ func (arbol *Arbol) insertar(llaveIn int) int {
 		}
 	}
 	return comparaciones
-}
-
-/*
-Funcion para hacer recorrido inOrden de un arbol.
-Parametro:
-
-	-raiz *Nodo: Raiz del arbol a recorrer.
-
-Retorna: No retorna nada
-*/
-func inOrder(raiz *Nodo) {
-	if raiz != nil {
-		inOrder(raiz.hijoIzquierdo)
-		fmt.Print("Llave: ", raiz.llave, " | Contador: ", raiz.contador, "\n")
-		inOrder(raiz.hijoDerecho)
-	}
 }
 
 //======================================Balance de Arbol=========================================================
@@ -336,8 +249,6 @@ func main() {
 	var llave = 10 //Llave a insertar
 	//Puntero a arbol vacio.
 	var arbol *Arbol = &Arbol{}
-	//En algunas funciones se usa el (puntero) nombreFuncion (parametros)
-	//Eso se llama Pointer Receivers, sirve para modificar el valor del puntero
 
 	arbol.insertar(llave)
 	llave = 5

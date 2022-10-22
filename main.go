@@ -10,7 +10,9 @@ Ultima Modificacion:
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Estructura para el nodo de los arboles
 type Nodo struct {
@@ -24,22 +26,76 @@ type Arbol struct {
 }
 
 /*
-	3. BUSCAR
-	Parametros:
-		-llave int: Llave del nodo que se esta buscando en el arbol.
-		-raiz * Nodo: Nodo raiz para buscar en el arbol (cambia conforme se hace la recursion).
-		-comparaciones: Contador para las comparaciones que se hacen hasta encontrar el nodo.
-	Retorna:
-		-bool: True si encuentra el nodo con la llave buscada
-		| False si no la encuentra
-		-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
+3. BUSCAR
+Metodo para buscar iterativamente una llave en un arbol.
+Parametros:
+
+	-llave int: Llave del nodo que se esta buscando en el arbol.
+
+Retorna:
+
+	-bool: True si encuentra el nodo con la llave buscada
+	| False si no la encuentra
+	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
+*/
+func (arbol *Arbol) buscarIterativo(llaveBuscada int) (bool, int) {
+	var comparaciones = 0       //Variable para contar las comparaciones
+	var nodoActual = arbol.raiz //Se crea nodo para bajar por el arbol
+	for {                       //Ciclo se repite mientas no se llegue a una hoja o encuentre el nodo.
+		comparaciones = comparaciones + 1
+		if nodoActual == nil { //Llego a una hoja, la llaveBuscada no existe
+			return false, comparaciones
+		} else if llaveBuscada == nodoActual.llave {
+			break
+		} else if llaveBuscada < nodoActual.llave { // Baja por la izquierda
+			nodoActual = nodoActual.hijoIzquierdo
+		} else { //Baja por la derecha
+			nodoActual = nodoActual.hijoDerecho
+		}
+	}
+	//Si encontro la llave buscada
+	return true, comparaciones
+}
+
+/*
+Funcion auxiliar para esconder el contador de comparaciones en la funcion buscar.
+
+Parametros:
+
+	-llave int: Llave del nodo que se esta buscando en el arbol.
+	-raiz * Nodo: Nodo raiz para buscar en el arbol (cambia conforme se hace la recursion).
+
+Retorna:
+
+	-bool: True si encuentra el nodo con la llave buscada
+	| False si no la encuentra
+	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
+*/
+func buscarRecursivo(llaveBuscada int, raiz *Nodo) (bool, int) {
+	return buscar(llaveBuscada, raiz, 0)
+}
+
+/*
+3. BUSCAR alternativo usando recursion
+Funcion para buscar una llave en un arbol.
+Parametros:
+
+	-llave int: Llave del nodo que se esta buscando en el arbol.
+	-raiz * Nodo: Nodo raiz para buscar en el arbol (cambia conforme se hace la recursion).
+	-comparaciones: Contador para las comparaciones que se hacen hasta encontrar el nodo.
+
+Retorna:
+
+	-bool: True si encuentra el nodo con la llave buscada
+	| False si no la encuentra
+	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
 */
 func buscar(llave int, raiz *Nodo, comparaciones int) (bool, int) {
 	//La raiz del arbol es nula
 	if raiz == nil {
-		return false, comparaciones
+		return false, comparaciones + 1
 	} else if raiz.llave == llave { //La el nodo raiz tiene la llave buscada.
-		return true, comparaciones
+		return true, comparaciones + 1
 	} else if llave > raiz.llave { // Si la llave es mayor que el nodo raiz, llama recursivamente al hijo derecho.
 		return buscar(llave, raiz.hijoDerecho, comparaciones+1)
 	} else { //Si la llave es menor que el nodo raiz, llama recursivamente al hijo izquierdo
@@ -48,17 +104,19 @@ func buscar(llave int, raiz *Nodo, comparaciones int) (bool, int) {
 }
 
 /*
-	4. INSERTAR
-	Funcion para insertar un nuevo nodo con la llave ingresada.
-	Debe ser ejecutado con la instancia del arbol a la que se quiere insertar el nuevo nodo.
-	Si la llave esta repetida, aumenta el contador del nodo.
+4. INSERTAR
+Funcion para insertar un nuevo nodo con la llave ingresada.
+Si la llave esta repetida, aumenta el contador del nodo con esa llave.
 
-	Parametros:
-		-llave int: Llave que se quiere insertar
-		-nodo *Nodo: Nodo para recorrer el arbol.
-		-comparaciones int: Contador de comparaciones que se realizan hasta insertar el nodo.
-	Retorna: Número entero, que será la cantidad de comparaciones realizadas, incluida la que
-			llevó a la inserción
+Parametros:
+
+	-llave int: Llave que se quiere insertar
+	-nodo *Nodo: Nodo para recorrer el arbol.
+	-comparaciones int: Contador de comparaciones que se realizan hasta insertar el nodo.
+
+Retorna: Número entero, que será la cantidad de comparaciones realizadas, incluida la que
+
+	llevó a la inserción
 */
 func (arbol *Arbol) insertar(llaveIn int) int {
 	//Si la raiz del arbol es vacia, se inserta de una vez.
@@ -96,16 +154,18 @@ func (arbol *Arbol) insertar(llaveIn int) int {
 }
 
 /*
-	Funcion para hacer recorrido inOrden de un arbol.
-	Parametro:
-		-raiz *Nodo: Raiz del arbol a recorrer.
-	Retorna: No retorna nada
+Funcion para hacer recorrido inOrden de un arbol.
+Parametro:
+
+	-raiz *Nodo: Raiz del arbol a recorrer.
+
+Retorna: No retorna nada
 */
-func inOrder(raiz *Nodo) {
+func enOrden(raiz *Nodo) {
 	if raiz != nil {
-		inOrder(raiz.hijoIzquierdo)
+		enOrden(raiz.hijoIzquierdo)
 		fmt.Print("Llave: ", raiz.llave, " | Contador: ", raiz.contador, "\n")
-		inOrder(raiz.hijoDerecho)
+		enOrden(raiz.hijoDerecho)
 	}
 }
 
@@ -113,29 +173,31 @@ func main() {
 	var llave = 10 //Llave a insertar
 	//Puntero a arbol vacio.
 	var arbol *Arbol = &Arbol{}
-	//En algunas funciones se usa el (puntero) nombreFuncion (parametros)
-	//Eso se llama Pointer Receivers, sirve para modificar el valor del puntero
 
-	var cantidadComparaciones = arbol.insertar(llave)
-	fmt.Print("Cantidad de comparaciones la llave ", llave, "= ", cantidadComparaciones, " \n")
+	arbol.insertar(llave)
 	llave = 5
-	cantidadComparaciones = arbol.insertar(llave)
-	fmt.Print("Cantidad de comparaciones la llave ", llave, "= ", cantidadComparaciones, " \n")
+	arbol.insertar(llave)
+	llave = 7
+	arbol.insertar(llave)
+	llave = 20
+	arbol.insertar(llave)
 	llave = 15
-	cantidadComparaciones = arbol.insertar(llave)
-	fmt.Print("Cantidad de comparaciones la llave ", llave, "= ", cantidadComparaciones, " \n")
-	llave = 5
-	cantidadComparaciones = arbol.insertar(llave)
-	fmt.Print("Cantidad de comparaciones la llave ", llave, "= ", cantidadComparaciones, " \n")
+	arbol.insertar(llave)
+	llave = 30
+	arbol.insertar(llave)
+	llave = 25
+	arbol.insertar(llave)
+	llave = 40
+	arbol.insertar(llave)
+	llave = 23
+	arbol.insertar(llave)
 
-	fmt.Print("\n Inorden arbol: \n")
-	inOrder(arbol.raiz)
+	balanceTree(arbol)
+	print(arbol.raiz, 0, "R")
 
-	fmt.Print("\nBuscar nodo\n")
-	fmt.Print(buscar(5, arbol.raiz, 0))
-	fmt.Print("\n")
-	fmt.Print(buscar(50, arbol.raiz, 0))
-
-	//La funcion buscar debe incluir la compracion del nodo actual? O sea, si llego a una hoja tambien se incluye?
+	fmt.Println("Buscar iterativo:")
+	fmt.Println(arbol.buscarIterativo(1))
+	fmt.Println("\nBuscar recursivo:")
+	fmt.Println(buscarRecursivo(1, arbol.raiz))
 
 }
