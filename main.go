@@ -32,6 +32,7 @@ func main() {
 
 	arbolBinario.Balancear(arbol)
 	arbolBinario.EnOrden(arbolBinario.ObtenerRaiz(arbol))
+	arbolBinario.Print(arbolBinario.ObtenerRaiz(arbol), 0, "R")
 
 	fmt.Println("Altura arbol 1: ", arbolBinario.Altura(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Cantidad de nodos: ", arbolBinario.ContarNodos(arbolBinario.ObtenerRaiz(arbol)))
