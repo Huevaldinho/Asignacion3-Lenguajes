@@ -12,7 +12,7 @@ package generador
 
 import "fmt"
 
-func isPrime(number int) bool {
+func IsPrime(number int) bool {
 	if number == 0 || number == 1 {
 		return false
 	} else {
@@ -26,13 +26,13 @@ func isPrime(number int) bool {
 }
 
 // Funcion para optener la x
-func getX(sem int) int {
+func GetX(sem int) int {
 	var candidato int
 	candidato = sem
 	//Se recorren posibles candidatos
 	for true {
 		//Se encontro un candidatos
-		if (isPrime(candidato)) && candidato > sem {
+		if (IsPrime(candidato)) && candidato > sem {
 			return candidato
 		}
 		candidato = candidato + 1
@@ -40,9 +40,9 @@ func getX(sem int) int {
 	return -1
 }
 
-func generaAleatorio(semilla int, n int, list *[]int) {
+func GeneraAleatorio(semilla int, n int, list *[]int) {
 	var x, m, a, b int
-	x = getX(semilla)
+	x = GetX(semilla)
 	m = 4096
 	a = 109
 	b = 853
@@ -52,21 +52,21 @@ func generaAleatorio(semilla int, n int, list *[]int) {
 	}
 }
 
-func convertidor(list *[]int) {
+func Convertidor(list *[]int) {
 	for i := 0; i < len(*list); i++ {
 		(*list)[i] = (*list)[i] % 255
 	}
 }
 
-func generaAleatorioAux(semilla, n int) []int {
+func GeneraAleatorioAux(semilla, n int) []int {
 	var array [5000]int                 //Valor maximo del array.
 	var slice = array[0:n]              //Se devuelve un slice con el valor solicitado
-	generaAleatorio(semilla, n, &slice) //slice se convierte en la lista de valores generados
-	convertidor(&slice)                 //Los valores en slice se traducen al intervalo 0-255
+	GeneraAleatorio(semilla, n, &slice) //slice se convierte en la lista de valores generados
+	Convertidor(&slice)                 //Los valores en slice se traducen al intervalo 0-255
 	return slice
 }
 
-func imprimir(list []int) {
+func Imprimir(list []int) {
 	//Para imprimir una lista
 	for i := 0; i < len(list); i++ {
 		fmt.Println("Elemento: ", i, " -> ", (list)[i])
