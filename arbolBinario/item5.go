@@ -7,7 +7,7 @@ Fecha Creación: 18/10/2022
 Ultima Modificacion: 25/10/2022
 */
 
-/*Generador de números pseudoaleatorios
+/*Algoritmo DSW
 Fuente: GRB Dynamics. (2016). SimpleBST [Software]. En GitHub (v0.2).
 https://github.com/GRB-Dynamics/SimpleBST/blob/master/src/IntBST.c
 Modificado y adaptado para Golang por Maria Fernanda Sanabria Solano
