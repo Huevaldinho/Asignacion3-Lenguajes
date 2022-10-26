@@ -23,7 +23,7 @@ Retorna:
 	| False si no la encuentra
 	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
 */
-func (arbol *Arbol) BuscarIterativo(llaveBuscada int) (bool, int) {
+func (arbol *Arbol) Buscar(llaveBuscada int) (bool, int) {
 	var comparaciones = 0       //Variable para contar las comparaciones
 	var nodoActual = arbol.raiz //Se crea nodo para bajar por el arbol
 	for {                       //Ciclo se repite mientas no se llegue a una hoja o encuentre el nodo.
@@ -56,8 +56,8 @@ Retorna:
 	| False si no la encuentra
 	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
 */
-func BuscarRecursivo(llaveBuscada int, raiz *Nodo) (bool, int) {
-	return Buscar(llaveBuscada, raiz, 0)
+func Buscar2(llaveBuscada int, raiz *Nodo) (bool, int) {
+	return BuscarRecursivo(llaveBuscada, raiz, 0)
 }
 
 /*
@@ -75,15 +75,15 @@ Retorna:
 	| False si no la encuentra
 	-int: Cantidad de comparaciones realizadas en la busqueda de la llave.
 */
-func Buscar(llave int, raiz *Nodo, comparaciones int) (bool, int) {
+func BuscarRecursivo(llave int, raiz *Nodo, comparaciones int) (bool, int) {
 	//La raiz del arbol es nula
 	if raiz == nil {
 		return false, comparaciones + 1
 	} else if raiz.llave == llave { //La el nodo raiz tiene la llave buscada.
 		return true, comparaciones + 1
 	} else if llave > raiz.llave { // Si la llave es mayor que el nodo raiz, llama recursivamente al hijo derecho.
-		return Buscar(llave, raiz.hijoDerecho, comparaciones+1)
+		return BuscarRecursivo(llave, raiz.hijoDerecho, comparaciones+1)
 	} else { //Si la llave es menor que el nodo raiz, llama recursivamente al hijo izquierdo
-		return Buscar(llave, raiz.hijoIzquierdo, comparaciones+1)
+		return BuscarRecursivo(llave, raiz.hijoIzquierdo, comparaciones+1)
 	}
 }
