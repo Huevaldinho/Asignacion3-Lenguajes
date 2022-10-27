@@ -40,9 +40,8 @@ func EnOrden(raiz *Nodo) {
 		-int: Altura del arbol.
 */
 func Altura(nodo *Nodo) int {
-	//La altura de un arbol vacio es -1.
 	if nodo == nil {
-		return -1
+		return 0
 	} else { //El arbol si tiene nodo raiz.
 		//Cuenta el nivel actual + el maximo de nivel entre los hijos.
 		return 1 + Max(Altura(nodo.hijoIzquierdo), Altura(nodo.hijoDerecho))
@@ -83,6 +82,15 @@ func ContarNodos(nodo *Nodo) int {
 		return 1 + ContarNodos(nodo.hijoIzquierdo) + ContarNodos(nodo.hijoDerecho)
 	}
 }
+
+/*
+	Funcion para calcular la densidad de un arbol.
+	Esta esta dada por: cantidad nodos arbol / altura del arbol.
+	Parametros:
+		-nodo *Nodo: Raiz del arbol.
+	Retorna:
+		-float64: Densidad del arbol.
+*/
 func Densidad(nodo *Nodo) float64 {
 	if nodo == nil {
 		return 0
@@ -97,20 +105,43 @@ func Densidad(nodo *Nodo) float64 {
 }
 
 /*
-La altura de un nodo en un arbol se define como la longitud del camino
-más largo que comienza en el nodo y termina en una hoja. La altura de un
-nodo hoja será de cero, y la altura de un nodo se puede calcular sumando
-uno a la mayor altura de sus hijos.
-La altura de un árbol se define como la altura de su raiz.
+	Funcion para calcular la profundidad promedio de un arbol.
+	Profundidad promedio es la suma de las profundidades de todos
+	los nodos del arbol dividida por el total de nodos del arbol.
+	Se utiliza en vez de ProfundidadPromedioAux para esconder el parametro
+	de la profundidad.
 
-La profundidad de un nodo se define como la longitud del camino (único)
-que comienza en la raiz y termina en el nodo. La profundidad de la raiz es
-cero, y la profundidad de un nodo se puede calcular como la profundidad
-de su padre mas uno.
-
-
-
-The average depth is the sum of all the node depths divided
-by n.
-
+	Parametros:
+		-nodo *Nodo: Nodo raiz del arbol.
+		-p_promedio float32: Profundidad promedio del arbol, inicia en 0.
+	Returna:
+		-float32: Profundidad promedio del arbol.
 */
+func ProfundidadPromedio(nodo *Nodo) float32 {
+	return ProfundidadPromedioAux(nodo, 0) / float32(ContarNodos(nodo))
+}
+
+/*
+	Idea tomada de: https://iq.opengenus.org/average-height-of-nodes-in-binary-tree/
+	Funcion para calcular la profundidad promedio de un arbol.
+	Profundidad promedio es la suma de las profundidades de todos
+	los nodos del arbol dividida por el total de nodos del arbol.
+
+	Parametros:
+		-nodo *Nodo: Nodo raiz del arbol.
+		-p_promedio float32: Profundidad promedio del arbol, inicia en 0.
+	Returna:
+		-float32: Profundidad promedio del arbol.
+*/
+func ProfundidadPromedioAux(nodo *Nodo, p_promedio float32) float32 {
+	//Si el nodo es una hoja, su profundidad es 0+p_promedio.
+	var p_promedio_hi float32 = 0 //Profundidad promedio hijo izquierdo. Cambia si no es hoja.
+	var p_promedio_hd float32 = 0 //Profundidad promedio hijo derecho. Cambia si no es hoja.
+	if nodo.hijoIzquierdo != nil {
+		p_promedio_hi = ProfundidadPromedioAux(nodo.hijoIzquierdo, p_promedio+1) //Suma p_promedio+1 y baja por la izquierda.
+	}
+	if nodo.hijoDerecho != nil {
+		p_promedio_hd = ProfundidadPromedioAux(nodo.hijoDerecho, p_promedio+1) //Suma p_promedio+1 y baja por la derecha.
+	}
+	return float32(p_promedio + p_promedio_hi + p_promedio_hd)
+}

@@ -25,7 +25,7 @@ func main() {
 	var arbol *arbolBinario.Arbol = &arbolBinario.Arbol{}
 
 	//Inserta valores generados aleatoriamente
-	al1 := [9]int{8, 3, 10, 1, 6, 4, 7, 14, 13}
+	al1 := [9]int{20, 10, 30, 5, 15, 25, 40, 1, 7}
 	for i := 0; i < len(al1); i++ {
 		arbol.Insertar(al1[i])
 	}
@@ -45,8 +45,6 @@ func main() {
 	fmt.Println("Altura arbol 1: ", arbolBinario.Altura(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Cantidad de nodos: ", arbolBinario.ContarNodos(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Densidad: ", arbolBinario.Densidad(arbolBinario.ObtenerRaiz(arbol)))
-
-	arbol.Insertar(33)
-	arbol.Buscar(33)
+	fmt.Println("Profundidad promedio: ", arbolBinario.ProfundidadPromedio(arbolBinario.ObtenerRaiz(arbol)))
 
 }
