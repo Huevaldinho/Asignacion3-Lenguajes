@@ -59,7 +59,7 @@ func Convertidor(list *[]int) {
 }
 
 func GeneraAleatorioAux(semilla, n int) []int {
-	var array [5000]int                 //Valor maximo del array.
+	var array [100001]int                 //Valor maximo del array.
 	var slice = array[0:n]              //Se devuelve un slice con el valor solicitado
 	GeneraAleatorio(semilla, n, &slice) //slice se convierte en la lista de valores generados
 	Convertidor(&slice)                 //Los valores en slice se traducen al intervalo 0-255
@@ -71,17 +71,4 @@ func Imprimir(list []int) {
 	for i := 0; i < len(list); i++ {
 		fmt.Println("Elemento: ", i, " -> ", (list)[i])
 	}
-
 }
-
-/*
-
-// Main function
-func main() {
-	imprimir(generaAleatorioAux(13, 10))
-	// fmt.Println("!... Hello World ...!")
-	// fmt.Println(getX(20))
-	// fmt.Println(getX(13))
-}
-
-*/

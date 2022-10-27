@@ -123,6 +123,7 @@ func ProfundidadPromedio(nodo *Nodo) float32 {
 
 /*
 	Idea tomada de: https://iq.opengenus.org/average-height-of-nodes-in-binary-tree/
+	Modificado y adaptado a Golang por Felipe Obando Arrieta
 	Funcion para calcular la profundidad promedio de un arbol.
 	Profundidad promedio es la suma de las profundidades de todos
 	los nodos del arbol dividida por el total de nodos del arbol.

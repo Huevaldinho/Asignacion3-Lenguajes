@@ -13,23 +13,18 @@ package main
 import (
 	//Para usar las cosas del arbol hay que ejecutar el comando: go mod init asignacion3-lenguajes
 	"asignacion3-lenguajes/arbolBinario"
+	"asignacion3-lenguajes/generador"
 	"fmt"
-	//	"asignacion3-lenguajes/generador"
 )
 
-func main() {
-
-	//var aleatorios []int = generador.GeneraAleatorioAux(13, 10)
-
-	//Puntero a arbol vacio.
+func Pruebas() {
 	var arbol *arbolBinario.Arbol = &arbolBinario.Arbol{}
 
-	//Inserta valores generados aleatoriamente
-	al1 := [9]int{20, 10, 30, 5, 15, 25, 40, 1, 7}
-	for i := 0; i < len(al1); i++ {
-		arbol.Insertar(al1[i])
+	//Valores generados aleatoriamente
+	var A []int = generador.GeneraAleatorioAux(11, 500)
+	for i := 0; i < len(A); i++ {
+		arbol.Insertar(A[i])
 	}
-
 	/*
 		for i := 0; i < len(aleatorios); i++ {
 			arbol.Insertar(aleatorios[i])
@@ -39,12 +34,26 @@ func main() {
 		arbolBinario.EnOrden(arbolBinario.ObtenerRaiz(arbol))
 		arbolBinario.Print(arbolBinario.ObtenerRaiz(arbol), 0, "R")
 	*/
-	arbolBinario.EnOrden(arbolBinario.ObtenerRaiz(arbol))
-	arbolBinario.Print(arbolBinario.ObtenerRaiz(arbol), 0, "R")
 
-	fmt.Println("Altura arbol 1: ", arbolBinario.Altura(arbolBinario.ObtenerRaiz(arbol)))
+	arbolBinario.Balancear(arbol)
+	/*
+
+
+		var secuencia []int = generador.GeneraAleatorioAux(11, 100000)
+
+		for i := 0; i < len(secuencia); i++ {
+			fmt.Print(arbol.Buscar(secuencia[i]))
+			fmt.Print(" - ")
+		}
+
+	*/
+
+	fmt.Println("Altura arbol: ", arbolBinario.Altura(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Cantidad de nodos: ", arbolBinario.ContarNodos(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Densidad: ", arbolBinario.Densidad(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Profundidad promedio: ", arbolBinario.ProfundidadPromedio(arbolBinario.ObtenerRaiz(arbol)))
+}
 
+func main() {
+	Pruebas()
 }
