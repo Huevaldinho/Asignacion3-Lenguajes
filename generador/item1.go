@@ -14,7 +14,7 @@ Modificado por Alonso Garita Granados
 Adaptado para Golang por Maria Fernanda Sanabria Solano
 */
 
-package generador
+package main
 
 import "fmt"
 
@@ -136,20 +136,19 @@ Retorna:
 */
 func Imprimir(list []int) {
 	//Para imprimir una lista
-	for i := 0; i < len(list); i++ {
-		fmt.Println("Elemento: ", i, " -> ", (list)[i])
+	fmt.Print("[")
+	for i := 0; i < len(list)-1; i++ {
+		fmt.Print((list)[i], ", ")
 	}
-
+	fmt.Print((list)[len(list)-1], " ]")
 }
 
 /*
-
 // Main function
 func main() {
-	imprimir(generaAleatorioAux(13, 10))
-	// fmt.Println("!... Hello World ...!")
-	// fmt.Println(getX(20))
-	// fmt.Println(getX(13))
-}
 
+	fmt.Println("Prueba n = 500, semilla = 11")
+	Imprimir(GeneraAleatorioAux(257, 5000))
+
+}
 */
