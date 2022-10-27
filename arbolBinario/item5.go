@@ -129,7 +129,7 @@ func Balancear(arbol *Arbol) {
 	//Realiza la cantidad de rotaciones a la izquierda necesaria para terminar con el balance
 	for nodosPerf > 1 {
 		nodosPerf /= 2
-		fmt.Println(nodosPerf)
+
 		RotarI(arbol.raiz)
 		tmp = arbol.raiz
 		for i := 0; i < nodosPerf; i++ {
