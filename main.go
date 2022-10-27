@@ -23,6 +23,7 @@ func Pruebas() {
 	//Valores generados aleatoriamente
 	var A []int = generador.GeneraAleatorioAux(11, 500)
 	for i := 0; i < len(A); i++ {
+		fmt.Println("Inserta: ", A[i])
 		arbol.Insertar(A[i])
 	}
 	/*
