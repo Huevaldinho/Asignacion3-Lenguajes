@@ -1,3 +1,13 @@
+/*
+Creadores:
+	Obando Arrieta Felipe de Jesús - 2021035489
+    Sanabria Solano María Fernanda - 2021005572
+
+Fecha Creación: 15/10/2022
+Ultima Modificacion: 22/10/2022
+
+*/
+
 package arbolBinario
 
 import "fmt"
@@ -33,11 +43,14 @@ func EnOrden(raiz *Nodo) {
 }
 
 /*
-	Funcion para obtener altura maxima de un arbol.
-	Parametros:
-		-nodo *Nodo: Nodo raiz del arbol a partir del cual se calcula la altura.
-	Retorna:
-		-int: Altura del arbol.
+Funcion para obtener altura maxima de un arbol.
+Parametros:
+
+	-nodo *Nodo: Nodo raiz del arbol a partir del cual se calcula la altura.
+
+Retorna:
+
+	-int: Altura del arbol.
 */
 func Altura(nodo *Nodo) int {
 	if nodo == nil {
@@ -49,12 +62,15 @@ func Altura(nodo *Nodo) int {
 }
 
 /*
-	Funcion para obtener el mayor el numero mayor entre dos numeros enteros.
-	Parametros:
-		-a int: Primer numero entero en la compracion.
-		-b int: Segundo numero entero en la comparacion.
-	Retorna:
-		-int: Mayor entre a y b.
+Funcion para obtener el mayor el numero mayor entre dos numeros enteros.
+Parametros:
+
+	-a int: Primer numero entero en la compracion.
+	-b int: Segundo numero entero en la comparacion.
+
+Retorna:
+
+	-int: Mayor entre a y b.
 */
 func Max(a int, b int) int {
 	if a > b {
@@ -65,11 +81,14 @@ func Max(a int, b int) int {
 }
 
 /*
-	Funcion para contar la cantidad de nodos de un arbol.
-	Parametros:
-		-nodo * Nodo: Nodo inicial del arbol.
-	Retorna:
-		-int: Cantidad de nodos del arbol.
+Funcion para contar la cantidad de nodos de un arbol.
+Parametros:
+
+	-nodo * Nodo: Nodo inicial del arbol.
+
+Retorna:
+
+	-int: Cantidad de nodos del arbol.
 */
 func ContarNodos(nodo *Nodo) int {
 	//Si el nodo es nil entonces no cuenta nada
@@ -84,12 +103,15 @@ func ContarNodos(nodo *Nodo) int {
 }
 
 /*
-	Funcion para calcular la densidad de un arbol.
-	Esta esta dada por: cantidad nodos arbol / altura del arbol.
-	Parametros:
-		-nodo *Nodo: Raiz del arbol.
-	Retorna:
-		-float64: Densidad del arbol.
+Funcion para calcular la densidad de un arbol.
+Esta esta dada por: cantidad nodos arbol / altura del arbol.
+Parametros:
+
+	-nodo *Nodo: Raiz del arbol.
+
+Retorna:
+
+	-float64: Densidad del arbol.
 */
 func Densidad(nodo *Nodo) float64 {
 	if nodo == nil {
@@ -105,34 +127,40 @@ func Densidad(nodo *Nodo) float64 {
 }
 
 /*
-	Funcion para calcular la profundidad promedio de un arbol.
-	Profundidad promedio es la suma de las profundidades de todos
-	los nodos del arbol dividida por el total de nodos del arbol.
-	Se utiliza en vez de ProfundidadPromedioAux para esconder el parametro
-	de la profundidad.
+Funcion para calcular la profundidad promedio de un arbol.
+Profundidad promedio es la suma de las profundidades de todos
+los nodos del arbol dividida por el total de nodos del arbol.
+Se utiliza en vez de ProfundidadPromedioAux para esconder el parametro
+de la profundidad.
 
-	Parametros:
-		-nodo *Nodo: Nodo raiz del arbol.
-		-p_promedio float32: Profundidad promedio del arbol, inicia en 0.
-	Returna:
-		-float32: Profundidad promedio del arbol.
+Parametros:
+
+	-nodo *Nodo: Nodo raiz del arbol.
+	-p_promedio float32: Profundidad promedio del arbol, inicia en 0.
+
+Returna:
+
+	-float32: Profundidad promedio del arbol.
 */
 func ProfundidadPromedio(nodo *Nodo) float32 {
 	return ProfundidadPromedioAux(nodo, 0) / float32(ContarNodos(nodo))
 }
 
 /*
-	Idea tomada de: https://iq.opengenus.org/average-height-of-nodes-in-binary-tree/
-	Modificado y adaptado a Golang por Felipe Obando Arrieta
-	Funcion para calcular la profundidad promedio de un arbol.
-	Profundidad promedio es la suma de las profundidades de todos
-	los nodos del arbol dividida por el total de nodos del arbol.
+Idea tomada de: https://iq.opengenus.org/average-height-of-nodes-in-binary-tree/
+Modificado y adaptado a Golang por Felipe Obando Arrieta
+Funcion para calcular la profundidad promedio de un arbol.
+Profundidad promedio es la suma de las profundidades de todos
+los nodos del arbol dividida por el total de nodos del arbol.
 
-	Parametros:
-		-nodo *Nodo: Nodo raiz del arbol.
-		-p_promedio float32: Profundidad promedio del arbol, inicia en 0.
-	Returna:
-		-float32: Profundidad promedio del arbol.
+Parametros:
+
+	-nodo *Nodo: Nodo raiz del arbol.
+	-p_promedio float32: Profundidad promedio del arbol, inicia en 0.
+
+Returna:
+
+	-float32: Profundidad promedio del arbol.
 */
 func ProfundidadPromedioAux(nodo *Nodo, p_promedio float32) float32 {
 	//Si el nodo es una hoja, su profundidad es 0+p_promedio.

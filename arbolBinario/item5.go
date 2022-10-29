@@ -3,7 +3,7 @@ Creadores:
 	Obando Arrieta Felipe de Jesús - 2021035489
     Sanabria Solano María Fernanda - 2021005572
 Fecha Creación: 18/10/2022
-Ultima Modificacion: 25/10/2022
+Ultima Modificacion: 28/10/2022
 */
 
 /*Algoritmo DSW
@@ -131,7 +131,7 @@ func Balancear(arbol *Arbol) {
 
 		RotarI(arbol.raiz)
 		tmp = arbol.raiz
-		for i := 0; i < nodosPerf; i++ {
+		for i := 0; i < nodosPerf-1; i++ {
 			RotarI(tmp.hijoDerecho)
 			tmp = tmp.hijoDerecho
 		}

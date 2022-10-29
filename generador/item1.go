@@ -13,7 +13,7 @@ Modificado por Alonso Garita Granados
 Adaptado para Golang por Maria Fernanda Sanabria Solano
 */
 
-package main
+package generador
 
 import "fmt"
 
@@ -141,11 +141,3 @@ func Imprimir(list []int) {
 	}
 	fmt.Print((list)[len(list)-1], " ]")
 }
-
-/*
-// Main function
-func main() {
-	fmt.Println("Prueba n = 500, semilla = 11")
-	Imprimir(GeneraAleatorioAux(257, 5000))
-}
-*/
