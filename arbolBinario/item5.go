@@ -1,3 +1,17 @@
+/*
+Creadores:
+	Obando Arrieta Felipe de Jesús - 2021035489
+    Sanabria Solano María Fernanda - 2021005572
+Fecha Creación: 18/10/2022
+Ultima Modificacion: 25/10/2022
+*/
+
+/*Algoritmo DSW
+Fuente: GRB Dynamics. (2016). SimpleBST [Software]. En GitHub (v0.2).
+https://github.com/GRB-Dynamics/SimpleBST/blob/master/src/IntBST.c
+Modificado y adaptado para Golang por Maria Fernanda Sanabria Solano
+*/
+
 package arbolBinario
 
 import (
@@ -5,18 +19,24 @@ import (
 	"math"
 )
 
-//======================================Balance de Arbol=========================================================
+/*
+Funcion rotar la rama hacia la derecha.
+Parametro:
 
-//http://www.smunlisted.com/day-stout-warren-dsw-algorithm.html
-// https://csactor.blogspot.com/2018/08/dsw-day-stout-warren-algorithm-dsw.html
+	-rama *Nodo: Rama a rotar hacia la derecha.
 
+Retorna:
+
+	-bool: True si se logró rotar, False si no
+*/
 func RotarD(rama *Nodo) bool {
 	if &rama == nil {
-		return false
+		return false //No hay nada que rotar
 	}
 	if rama.hijoIzquierdo == nil {
-		return false
+		return false //No se puede rotar con nulo
 	}
+	// Se guarda temporalmente la informacion de la rama
 	var tempLlave int = rama.llave
 	var tempContador int = rama.contador
 
@@ -35,13 +55,24 @@ func RotarD(rama *Nodo) bool {
 	return true
 }
 
+/*
+Funcion rotar la rama hacia la izquierda.
+Parametro:
+
+	-rama *Nodo: Rama a rotar hacia la izquierda.
+
+Retorna:
+
+	-bool: True si se logró rotar, False si no
+*/
 func RotarI(rama *Nodo) bool {
 	if rama == nil {
-		return false
+		return false //No hay nada que rotar
 	}
 	if rama.hijoDerecho == nil {
-		return false
+		return false //No se puede rotar con nulo
 	}
+	// Se guarda temporalmente la informacion de la rama
 	var tempLlave int = rama.llave
 	var tempContador int = rama.contador
 
@@ -60,6 +91,14 @@ func RotarI(rama *Nodo) bool {
 	return true
 }
 
+/*
+Funcion para balancear un arbol siguiendo el algoritmo DSW.
+Parametro:
+
+	-arbol *Arbol: Arbol a balancear.
+
+Retorna:
+*/
 func Balancear(arbol *Arbol) {
 	var tmp *Nodo = arbol.raiz
 	var cant int = 0
@@ -74,6 +113,7 @@ func Balancear(arbol *Arbol) {
 	var nodosPerf = (int(math.Pow(2.0, math.Ceil(math.Log2(float64(cant)))-1.0)) - 1) //Numero de nodos del arbol perfectamente balanceado mas cercano
 	var ultimos int = cant - nodosPerf                                                //Numero de hijos esperados en el ultimo nivel
 
+	//Realiza "ultimos" cantidad de rotaciones a la izquierda
 	tmp = arbol.raiz
 	for i := 0; i < ultimos; i++ {
 		if i == 0 {
@@ -85,9 +125,10 @@ func Balancear(arbol *Arbol) {
 		}
 	}
 
+	//Realiza la cantidad de rotaciones a la izquierda necesaria para terminar con el balance
 	for nodosPerf > 1 {
 		nodosPerf /= 2
-		fmt.Println(nodosPerf)
+
 		RotarI(arbol.raiz)
 		tmp = arbol.raiz
 		for i := 0; i < nodosPerf; i++ {
@@ -97,9 +138,19 @@ func Balancear(arbol *Arbol) {
 	}
 }
 
+/*
+Funcion para imprimir los nodos con sus hijos.
+Parametro:
+
+	-Nodo *Nodo: Nodo a imprimir.
+	-cant int: Cantidad de espacios que deber'ian colocarse antes
+	-nomb string: Posicion del nodo
+
+Retorna:
+*/
 func Print(nodo *Nodo, cant int, nomb string) {
 	if nodo == nil {
-		return
+		return //No hay nada que imprimir
 	}
 	var espacios string = ""
 	//Espacios por estetica

@@ -21,33 +21,21 @@ func Pruebas() {
 	var arbol *arbolBinario.Arbol = &arbolBinario.Arbol{}
 
 	//Valores generados aleatoriamente
-	var A []int = generador.GeneraAleatorioAux(11, 500)
+	var A []int = generador.GeneraAleatorioAux(11, 5000)
 	for i := 0; i < len(A); i++ {
 		fmt.Println("Inserta: ", A[i], " - Cantidad Comparaciones: ", arbol.Insertar(A[i]))
 	}
-	/*
-		for i := 0; i < len(aleatorios); i++ {
-			arbol.Insertar(aleatorios[i])
-		}
-
-		arbolBinario.Balancear(arbol)
-		arbolBinario.EnOrden(arbolBinario.ObtenerRaiz(arbol))
-		arbolBinario.Print(arbolBinario.ObtenerRaiz(arbol), 0, "R")
-	*/
 
 	arbolBinario.Balancear(arbol)
-	/*
 
+	var secuencia []int = generador.GeneraAleatorioAux(11, 100000)
 
-		var secuencia []int = generador.GeneraAleatorioAux(11, 100000)
-
-		for i := 0; i < len(secuencia); i++ {
-			fmt.Print(arbol.Buscar(secuencia[i]))
-			fmt.Print(" - ")
-		}
-
-	*/
-
+	for i := 0; i < len(secuencia); i++ {
+		fmt.Print(arbol.Buscar(secuencia[i]))
+		fmt.Print(" - ")
+	}
+	fmt.Println()
+	fmt.Println(" ---------------------------------- ")
 	fmt.Println("Altura arbol: ", arbolBinario.Altura(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Cantidad de nodos: ", arbolBinario.ContarNodos(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Densidad: ", arbolBinario.Densidad(arbolBinario.ObtenerRaiz(arbol)))

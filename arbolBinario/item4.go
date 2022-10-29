@@ -55,5 +55,6 @@ func (arbol *Arbol) Insertar(llaveIn int) int {
 			nodoActual = nodoActual.hijoDerecho
 		}
 	}
+	comparaciones = comparaciones + 1
 	return comparaciones
 }
