@@ -2,7 +2,6 @@
 Creadores:
 	Obando Arrieta Felipe de Jesús - 2021035489
     Sanabria Solano María Fernanda - 2021005572
-
 Fecha Creación: 17/10/2022
 Ultima Modificacion: 24/10/2022
 */
@@ -146,9 +145,7 @@ func Imprimir(list []int) {
 /*
 // Main function
 func main() {
-
 	fmt.Println("Prueba n = 500, semilla = 11")
 	Imprimir(GeneraAleatorioAux(257, 5000))
-
 }
 */

@@ -15,27 +15,33 @@ import (
 	"asignacion3-lenguajes/arbolBinario"
 	"asignacion3-lenguajes/generador"
 	"fmt"
-	//	"asignacion3-lenguajes/generador"
 )
 
-func main() {
-
-	var aleatorios []int = generador.GeneraAleatorioAux(13, 10)
-
-	//Puntero a arbol vacio.
+func Pruebas() {
 	var arbol *arbolBinario.Arbol = &arbolBinario.Arbol{}
 
-	//Inserta valores generados aleatoriamente
-	for i := 0; i < len(aleatorios); i++ {
-		arbol.Insertar(aleatorios[i])
+	//Valores generados aleatoriamente
+	var A []int = generador.GeneraAleatorioAux(11, 5000)
+	for i := 0; i < len(A); i++ {
+		fmt.Println("Inserta: ", A[i], " - Cantidad Comparaciones: ", arbol.Insertar(A[i]))
 	}
 
 	arbolBinario.Balancear(arbol)
-	arbolBinario.EnOrden(arbolBinario.ObtenerRaiz(arbol))
-	arbolBinario.Print(arbolBinario.ObtenerRaiz(arbol), 0, "R")
 
-	fmt.Println("Altura arbol 1: ", arbolBinario.Altura(arbolBinario.ObtenerRaiz(arbol)))
+	var secuencia []int = generador.GeneraAleatorioAux(11, 100000)
+
+	for i := 0; i < len(secuencia); i++ {
+		fmt.Print(arbol.Buscar(secuencia[i]))
+		fmt.Print(" - ")
+	}
+	fmt.Println()
+	fmt.Println(" ---------------------------------- ")
+	fmt.Println("Altura arbol: ", arbolBinario.Altura(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Cantidad de nodos: ", arbolBinario.ContarNodos(arbolBinario.ObtenerRaiz(arbol)))
 	fmt.Println("Densidad: ", arbolBinario.Densidad(arbolBinario.ObtenerRaiz(arbol)))
+	fmt.Println("Profundidad promedio: ", arbolBinario.ProfundidadPromedio(arbolBinario.ObtenerRaiz(arbol)))
+}
 
+func main() {
+	Pruebas()
 }

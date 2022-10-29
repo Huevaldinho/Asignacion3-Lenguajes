@@ -2,7 +2,6 @@
 Creadores:
 	Obando Arrieta Felipe de Jesús - 2021035489
     Sanabria Solano María Fernanda - 2021005572
-
 Fecha Creación: 18/10/2022
 Ultima Modificacion: 25/10/2022
 */
